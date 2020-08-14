@@ -16,30 +16,32 @@
 
 package org.springframework.oxm.castor;
 
-import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import javax.xml.transform.Source;
-import javax.xml.transform.sax.SAXResult;
-import javax.xml.transform.stream.StreamResult;
-
 import org.castor.xml.XMLProperties;
 import org.exolab.castor.xml.XercesXMLSerializerFactory;
 import org.junit.Test;
 import org.mockito.InOrder;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.oxm.AbstractMarshallerTests;
+import org.springframework.oxm.jibx.FlightType;
+import org.springframework.oxm.jibx.Flights;
+import org.springframework.oxm.xstream.Flight;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xmlunit.builder.Input;
 import org.xmlunit.xpath.JAXPXPathEngine;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.oxm.AbstractMarshallerTests;
+import javax.xml.transform.Source;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.stream.StreamResult;
+import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.xmlunit.matchers.CompareMatcher.*;
+import static org.xmlunit.matchers.CompareMatcher.isSimilarTo;
 
 /**
  * Tests the {@link CastorMarshaller} class.
@@ -120,7 +122,7 @@ public class CastorMarshallerTests extends AbstractMarshallerTests<CastorMarshal
 
 	@Override
 	protected Object createFlights() {
-		Flight flight = new Flight();
+		FlightType flight = new FlightType();
 		flight.setNumber(42L);
 		Flights flights = new Flights();
 		flights.addFlight(flight);
